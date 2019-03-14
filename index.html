@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>New Airbnb</title>
+    <title>index</title>
 
     <meta
       name="description"
@@ -15,70 +15,87 @@
 
     <style type="text/css">
 
-      /*set the background*/
-      .bg {
-            background: url('/img/index_img.jpg');
-            background-repeat: no-repeat;
-            background-position: center;
-            background-size: 100%; 
-            vertical-align: middle;
-            background-clip:border-box;
-            height:auto;
-            line-height: auto;
-            margin-top:-20px;
-            background-color:transparent;
-
-      }
-      .inner{
-        height: 750px;
-        background: rgba(138, 134, 134, 0.575);
-      }
-      .center{text-align:center}
-      .title{
-        padding:100px;
-      } 
-      .textBg{
-        background:rgb(209, 206, 206);
-        height:280px; 
-        width:500px;
-        text-align: center;
-        margin-left: 375px;
-        margin-top:-30px;
-        font-size:100%;
-        color:rgb(17, 17, 17);
-        border-radius:25px;
-        padding:0.5cm;
-      }
-      
-      /*set the nav bar*/
-      ul {
+     /*set the nav bar*/
+     ul {
        list-style-type: none;
        margin: 0;
        padding: 0;
        overflow: hidden;
        background-color:#e2e7ec;
-       height:65px;
       }
 
       li {
-       float: left;
+       /* float:left; */
+       display:inline-block;
+       /* height: */
+      }
+
+      li img{
+        margin-left:2%;
       }
 
       li a {
        display: block;
        color: rgb(17, 16, 16);
        text-align: center;
-       padding: 15px 20px;
+       padding: 15px 35px;
        text-decoration: none;
       }
 
       li a:hover {
        background-color: #e2e7ec;
       }
-      
-      a.leftPand{
-       margin-left:-80px;
+
+      .navfirst{
+        margin-left: -550px;
       }
+      /* .navsed{
+        margin-left:-490px;
+      }
+      .navthird{
+        margin-left:-390px;
+      }
+      .navforth{
+        margin-left:-290px;
+      } */
+
+
+
+
+      /*set the background*/
+      .bg {
+        background: url('./img/index_img.jpg');
+        background-repeat: no-repeat;
+        background-size: cover; 
+        height:800px;
+        line-height: auto;
+        margin-top:-16px;
+        background-color:transparent;
+      }
+      .inner{
+        height:inherit;
+        background: rgba(138, 134, 134, 0.575);
+      }
+      .center{text-align:center}
+      .title{
+        padding:7%;
+      } 
+      .textBg{
+        background:rgb(209, 206, 206);
+        height:115%; 
+        width:35%;
+        text-align: center;
+        margin-left:auto;
+        margin-right:auto;
+        /* margin-top:-30px; */
+        font-size:100%;
+        color:rgb(17, 17, 17);
+        border-radius:25px;
+        padding:1%;
+      }
+      
+     
+      
     
     
     
@@ -92,14 +109,12 @@
   
   <body>
       <ul>
-          <li><img  src="/img/logo.png" width="40%" height="40%"><li>
-          <li><a class="" href="/">Home</a></li>
+          <li><img  src="./img/logo.png" width="10%" height="10%"><li>
+          <li class="navfirst"><a href="/homepage.html">Home</a></li>
           <li><a href="/signup.html">Sign Up</a></li>
           <li><a href="">Sign Out</a></li>
           <li><a href="">About</a></li>
       </ul>
-
-
     <div class="bg">
     <div class="inner">
     <div class="container-fluid">
