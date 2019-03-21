@@ -257,11 +257,11 @@
       search_form.onsubmit = function(e) {
         e.preventDefault();
         document.getElementById("show_table").innerHTML = "";
-        document.getElementById("sentence").innerHTML = "Search result:";
-        // var title1 = document.createElement("span");
-        // title1.id = "sentence";
-        // title1.innerHTML = "Search result:";
-       // $(".show").append(title1);
+        document.getElementById("show_title").innerHTML = "";
+        var title1 = document.createElement("span");
+        title1.id = "sentence";
+        title1.innerHTML = "Search result:";
+        $("#show_title").append(title1);
         var addr = document.getElementById("address").value;
         var begindate = document.getElementById("date_start").value;
         var enddate = document.getElementById("date_end").value;
