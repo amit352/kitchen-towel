@@ -13,7 +13,7 @@
     />
     <meta name="author" content="LayoutIt!" />
 
-    <!-- <link href="css/bootstrap.min.css" rel="stylesheet" /> -->
+    <!-- <link href="css/bootstrap.min.css" rel="stylesheet" />   -->
     <!-- <link href="css/style.css" rel="stylesheet" /> -->
 
     <style>
@@ -207,7 +207,7 @@
         <div class="col-md-6">
           <div class="textBgLf">
           <div class="show" id="show" style="text-align: center">
-            <div>
+            <div id ="show_title">
             <span id="sentence">Explore new airbnb:</span>
           </div>
             <div id = "show_table" style="padding-top:20px" style = "height:400px"></div>
@@ -256,11 +256,12 @@
 
       search_form.onsubmit = function(e) {
         e.preventDefault();
-        document.getElementById("show").innerHTML = "";
+        document.getElementById("show_table").innerHTML = "";
+        document.getElementById("show_title").innerHTML = "";
         var title1 = document.createElement("span");
         title1.id = "sentence";
         title1.innerHTML = "Search result:";
-        $(".show").append(title1);
+        $("#show_title").append(title1);
         var addr = document.getElementById("address").value;
         var begindate = document.getElementById("date_start").value;
         var enddate = document.getElementById("date_end").value;
@@ -275,13 +276,20 @@
             date_begin: begindate,
             date_end: enddate,
             number_of_beds: bed_num,
-            max_distance: distance
+            max_distance: distance*1000
           },
           success: function(msg) {
             var geocoder = new google.maps.Geocoder();
             var search_result = msg.house_list;
+            var table = document.createElement("table");
+            table.setAttribute("border", "1");
+            table.setAttribute("style", " width:500px; table-layout: fixed;");
             $.each(search_result, function(index, n) {
               var rowTr = document.createElement("tr");
+              if(search_result[index].active == true)
+              {
+                rowTr.setAttribute("style", "background-color: #F78181;");
+              }
               var td_1 = document.createElement("td");
               td_1.setAttribute("align", "center");
               var home_id = search_result[index].house_id;
@@ -315,6 +323,7 @@
                 }
               }); 
               table.appendChild(rowTr);
+              $("#show_table").append(table);
               var geocoder = new google.maps.Geocoder();
               geocodeAddress(geocoder, map);
               function geocodeAddress(geocoder, resultsMap) {
