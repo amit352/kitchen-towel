@@ -171,6 +171,15 @@
             row_4.appendChild(td_4_1);
             row_4.appendChild(td_4_2);
             table.appendChild(row_4);
+            var row_5 = document.createElement("tr");
+            row_5.setAttribute("class", "table-active");
+            var td_5_1 = document.createElement("td");
+            td_5_1.innerHTML = "Price:";
+            var td_5_2 = document.createElement("td");
+            td_5_2.innerHTML = home_information.price + "$";
+            row_5.appendChild(td_5_1);
+            row_5.appendChild(td_5_2);
+            table.appendChild(row_5);
             div.append(table);
             var row_des = document.createElement("tr");
             var description_info = home_information.description;
