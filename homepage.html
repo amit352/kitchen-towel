@@ -207,7 +207,10 @@
         <div class="col-md-6">
           <div class="textBgLf">
           <div class="show" id="show" style="text-align: center">
+            <div>
             <span id="sentence">Explore new airbnb:</span>
+          </div>
+            <div id = "show_table" style="padding-top:20px" style = "height:400px"></div>
           </div>
           </div>
         </div>
@@ -239,10 +242,6 @@
             if (status === "OK") {
               resultsMap.setCenter(results[0].geometry.location);
               map.setZoom(15);
-              // var marker = new google.maps.Marker({
-              //   map: resultsMap,
-              //   position: results[0].geometry.location
-              // });
               lat = results[0].geometry.location.lat();
               lng = results[0].geometry.location.lng();
             } else {
@@ -283,36 +282,39 @@
             var search_result = msg.house_list;
             $.each(search_result, function(index, n) {
               var rowTr = document.createElement("tr");
-              var information =
-                "<td>" +
-                search_result[index].name +
-                "&nbsp&nbsp&nbsp" +
-                "</td>" +
-                "<td>" +
-                search_result[index].address +
-                "</td>" +
-                "<td>" +
-                search_result[index].city +
-                "</td>" +
-                "<td>" +
-                search_result[index].province +
-                "&nbsp&nbsp&nbsp" +
-                "</td>" +
-                "<td>" +
-                search_result[index].date_begin +
-                "&nbsp&nbsp&nbsp" +
-                "</td>" +
-                "<td>" +
-                search_result[index].date_end +
-                "&nbsp&nbsp&nbsp" +
-                "</td>";
-              var home_id_search = search_result[index].house_id;
-              var detail_search = "<a href=\"detail.html?home_id="+home_id_search+"\">details</a>";  
-
-
-              rowTr.innerHTML = information+detail_search;
-              $(".show").append(rowTr);
-              console.log(search_result[index].place_id);
+              var td_1 = document.createElement("td");
+              td_1.setAttribute("align", "center");
+              var home_id = search_result[index].house_id;
+              td_1.innerHTML = "<a href=\"detail.html?home_id="+home_id+"\">" + search_result[index].name + "</a>";
+              var td_2 = document.createElement("td");
+              td_2.setAttribute("align","center");
+              td_2.setAttribute("style", "width:400;");
+              td_2.innerHTML = search_result[index].address + "," + search_result[index].city + "," + search_result[index].province;
+              var td_3 = document.createElement("td");
+              td_3.setAttribute("align", "center");
+              td_3.innerHTML = search_result[index].price + "$";
+              var houseid = search_result[index].house_id;
+              rowTr.appendChild(td_1);
+              rowTr.appendChild(td_2);
+              rowTr.appendChild(td_3);
+              $.ajax({
+                type: "GET",
+                url: "/api/house/download_photos",
+                data: {
+                  house_id: houseid
+                },
+                success: function(msg) {
+                      var pic_list = msg.info;
+                      var td_4 = document.createElement("td");
+                      td_4.setAttribute("style", "width:80; height:80;");
+                      var img = document.createElement("img");
+                      img.setAttribute("style", "width:80px;height:80px");
+                      img.src = pic_list[0];
+                      td_4.append(img);
+                      rowTr.appendChild(td_4);
+                }
+              }); 
+              table.appendChild(rowTr);
               var geocoder = new google.maps.Geocoder();
               geocodeAddress(geocoder, map);
               function geocodeAddress(geocoder, resultsMap) {
@@ -347,36 +349,46 @@
           url: "/api/house/search",
           success: function(data) {
             var room_information = data.house_list;
+            var table = document.createElement("table");
+            table.setAttribute("border", "1");
+            table.setAttribute("style", " width:500px; table-layout: fixed;");
             $.each(room_information, function(index, n) {
               var rowTr = document.createElement("tr");
-              var information =
-                "<td>" +
-                room_information[index].name +
-                "&nbsp&nbsp&nbsp" +
-                "</td>" +
-                "<td>" +
-                room_information[index].address +
-                "</td>" +
-                "<td>" +
-                room_information[index].city +
-                "</td>" +
-                "<td>" +
-                room_information[index].province +
-                "&nbsp&nbsp&nbsp" +
-                "</td>" +
-                "<td>" +
-                room_information[index].date_begin +
-                "&nbsp&nbsp&nbsp" +
-                "</td>" +
-                "<td>" +
-                room_information[index].date_end +
-                "&nbsp&nbsp&nbsp" +
-                "</td>";
+              var td_1 = document.createElement("td");
+              td_1.setAttribute("align", "center");
               var home_id = room_information[index].house_id;
-              var detail = "<a href=\"detail.html?home_id="+home_id+"\">details</a>";
-              rowTr.innerHTML = information+detail;
-              $(".show").append(rowTr);
+              td_1.innerHTML = "<a href=\"detail.html?home_id="+home_id+"\">" + room_information[index].name + "</a>";
+              var td_2 = document.createElement("td");
+              td_2.setAttribute("align","center");
+              td_2.setAttribute("style", "width:400;");
+              td_2.innerHTML = room_information[index].address + "," + room_information[index].city + "," + room_information[index].province;
+              var td_3 = document.createElement("td");
+              td_3.setAttribute("align", "center");
+              td_3.innerHTML = room_information[index].price + "$";
+              var houseid = room_information[index].house_id;
+              rowTr.appendChild(td_1);
+              rowTr.appendChild(td_2);
+              rowTr.appendChild(td_3);
+              $.ajax({
+                type: "GET",
+                url: "/api/house/download_photos",
+                data: {
+                  house_id: houseid
+                },
+                success: function(msg) {
+                      var pic_list = msg.info;
+                      var td_4 = document.createElement("td");
+                      td_4.setAttribute("style", "width:80; height:80;");
+                      var img = document.createElement("img");
+                      img.setAttribute("style", "width:80px;height:80px");
+                      img.src = pic_list[0];
+                      td_4.append(img);
+                      rowTr.appendChild(td_4);
+                }
+              }); 
+              table.appendChild(rowTr);
             });
+            $("#show_table").append(table);
           }
         });
       }
