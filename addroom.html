@@ -8,8 +8,8 @@
       /* Always set the map height explicitly to define the size of the div
        * element that contains the map. */
       #map {
-        height: 40%;
-        margin-top:-15.5px;
+        height: 100%; 
+        padding-top:181%;
       }
       /* Optional: Makes the sample page fill the window. */
       html,
@@ -27,33 +27,40 @@
             /* vertical-align: middle; */
             /* background-clip:border-box; */
             height:auto;
+            width: 105.08%;
             line-height: auto;
             background-color:transparent;
 
       }
       .inner{
-        height:100%;
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: cover; 
+        height:auto;
+        line-height: auto;
+        margin:0 -2.5% 0 -2.5%;
         background: rgba(138, 134, 134, 0.575);
       }
 
       .title{
         padding:100px;
         margin-top:-30px;
+        text-align:center;
       }
       .center{text-align:center}
       .textBg{
         background:rgb(209, 206, 206);
-        height:100%;
-        width:40%;
-        /* text-align: center; */
-        margin-left: 30%;
-        margin-right:20%;
+        /* height:500%; */
+        width:60%;
+        margin-left: auto;
+        margin-right: auto;
+        text-align: center;
         margin-top:-5%;
-        margin-bottom:100px;
+        margin-bottom:10%;
         font-size:100%;
         color:rgb(17, 17, 17);
         border-radius:25px;
-        padding:0.5cm;
+        padding:0.8cm;
       }
       /*set the nav bar*/
       .tag{
@@ -108,6 +115,9 @@
     </style>
     <!-- <link href="css/bootstrap.min.css" rel="stylesheet" /> -->
     <link href="css/style.css" rel="stylesheet" />
+    <!-- <link href="css/bootstrap.min-addroom-col-md-6.css" rel="stylesheet" /> -->
+
+
     <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
 	  <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
    	<script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -133,27 +143,19 @@
                 </ul> 
             </div> 
         </nav>
-
-
-    <div id="map"></div>
+    
     <div class="bg">
-      <div class="inner">
+    <div class="inner"> 
+      <div class="container-fluid">
+        <div class="row">
 
-        <div class="container-fluid center">
-          <div class="title">
-            <div class="row">
-              <div class="col-md-12">
-                <h3>
-                  Add a room
-                </h3>
-              </div>
-            </div>
-          </div>
-
-          <div class="row">
-            <div class="col-md-12">
-              <div class="textBg">
-                <form role="form" id="add-form" method="post">
+            <div class="col-md-6">
+              <h3 class="title">
+                Add a room
+              </h3>
+               
+                <form role="form" id="add-form" method="post" class="textBg">
+                  
                   <div class="form-group">
                     <label for="name">
                       House name
@@ -163,42 +165,45 @@
                       <span id = "reminder_housename"></span>
                     </div>
                   </div>
+
                   <div class="form-group">
                     <label for="street">
                       Street
                     </label>
                     <div align="center">
-                      <input
-                        type="text"
-                        class="form-control"
-                        id="street"
-                        name="street"
-                      />
-                      <span id = "reminder_street"></span>
-                    </div>
+                       <input
+                       type="text"
+                       class="form-control"
+                       id="street"
+                       name="street"
+                       />
+                       <span id = "reminder_street"></span>
+                     </div>
                   </div>
+
                   <div class="form-group" align="center">
                     <label for="City">
                       City
                     </label>
-                    <input type="text" class="form-control" id="city" name="city" />
-                    <span id = "reminder_city"></span>
-                    <span id="checktext2" class="warning"></span>
+                      <input type="text" class="form-control" id="city" name="city" />
+                      <span id = "reminder_city"></span>
+                      <span id="checktext2" class="warning"></span>
                   </div>
+
                   <div class="form-group">
                     <label for="provinces">
                       Province
                     </label>
                     <div align="center">
-                    <input
+                      <input
                       type="text"
                       class="form-control"
                       id="Provinces"
                       name="Provinces"
                       list="Provinces_list"
                       onchange="remap()"
-                    />
-                    <span id = "reminder_province"></span>
+                      />
+                      <span id = "reminder_province"></span>
                     </div>
                     <datalist id="Provinces_list">
                       <option>NL</option>
@@ -215,51 +220,56 @@
                       <option>NT</option>
                       <option>NU</option>
                     </datalist>
-                   </div>
+                  </div>
+
                   <div class="form-group">
                     <label for="code">
                       Postal code
                     </label>
                     <div align="center">
-                    <input type="text" class="form-control" id="code" name="code" />
-                    <span id = "reminder_code"></span>
+                      <input type="text" class="form-control" id="code" name="code" />
+                      <span id = "reminder_code"></span>
                     </div>
                   </div>
+
                   <div class="form-group" align="center">
                     <label for="exampleInputPassword1">
                       Number of bed
                     </label>
-                    <input
+                      <input
                       type="number"
                       class="form-control"
                       id="beds"
                       name= "beds"
                       placeholder="1"
-                    />
-                    <span id = "reminder_beds"></span>
-                    <span id = "reminder_beds_num"></span>
-                  </div>
-                  <div class="form-group" align="center">
-                      <label for="exampleInputPassword1">
-                        Price
-                      </label>
-                      <input
-                        type="number"
-                        class="form-control"
-                        id="price"
-                        name = "price"
-                        placeholder="100"
                       />
-                      <span id = "reminder_price"></span>
-                      <span id = "reminder_price_value"></span>
-                    </div>
+                      <span id = "reminder_beds"></span>
+                      <span id = "reminder_beds_num"></span>
+                  </div>
+
+                  <div class="form-group" align="center">
+                     <label for="exampleInputPassword1">
+                       Price
+                     </label>
+                       <input
+                       type="number"
+                       class="form-control"
+                       id="price"
+                       name = "price"
+                       placeholder="100"
+                       />
+                       <span id = "reminder_price"></span>
+                       <span id = "reminder_price_value"></span>
+                  </div>
+
                   <div class="form-group" align="center">
                     <label for="exampleInputPassword1">
                       Check in
                     </label>
-                    <input type="date" class="form-control" id="date_start" name = "date_start" />
-                    <span id = "reminder_checkin"></span>
+                      <input type="date" class="form-control" id="date_start" name = "date_start" />
+                      <span id = "reminder_checkin"></span>
                   </div>
+
                   <div class="form-group" align="center">
                     <label for="exampleInputPassword1">
                       Check out
@@ -267,24 +277,26 @@
                     <input type="date" class="form-control" id="date_end" name = "date_end" />
                     <span id = "reminder_checkout"></span>
                   </div>
+
                   <div class="form-group" align="center"> 
                     <label for="exampleInputEmail1">
-                      Description
+                      Description
                     </label>
-                    <textarea 
-                      rows="5" 
-                      cols="50" 
-                      placeholder="Add some details about the room for your guest." 
-                      class="comments"
-                      id = "des"
-                      name = "des"
-                      autofocus>
-                    </textarea>
+                     <textarea 
+                     rows="5" 
+                     cols="50" 
+                     placeholder="Add some details about the room for your guest." 
+                     class="comments"
+                     id = "des"
+                     name = "des"
+                     autofocus>
+                     </textarea>
                   </div>
+
                   <div class="file-box">
-                      <img id="preview" />
+                    <img id="preview" />
                       <!-- <input type="text" id="imgfield" class="txt" placeholder="预览"> -->
-                      <input type="file" name="file" id = "input_file" accept="image/gif,image/jpeg,image/jpg,image/png,image/svg" onchange="imgPreview(this)" >  
+                    <input type="file" name="file" id = "input_file" accept="image/gif,image/jpeg,image/jpg,image/png,image/svg" onchange="imgPreview(this)" >  
                   </div>
                  
                   
@@ -294,13 +306,17 @@
                       Create your room
                     </button>
                   </div>
+
                 </form>
+            </div>
+                
+            <div class="col-md-6">
+              <div id="map">
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
-    </div>
       <script>
       var map;
       var lat;
