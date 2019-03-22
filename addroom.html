@@ -49,17 +49,23 @@
       .center{text-align:center}
       .textBg{
         background:rgb(209, 206, 206);
-        /* height:500%; */
-        width:60%;
-        margin-left: auto;
-        margin-right: auto;
+        position:absolute;
+        left:15%;
+        right:15%;
+        bottom:5%;
+        top:10%;
         text-align: center;
+
+        height:auto;
+        width:auto;
+        /* margin-left: auto;
+        margin-right: auto;
         margin-top:-5%;
-        margin-bottom:10%;
+        margin-bottom:10%; */
         font-size:100%;
         color:rgb(17, 17, 17);
         border-radius:25px;
-        padding:0.8cm;
+        padding:3% 5% 5% 5%;
       }
       /*set the nav bar*/
       .tag{
@@ -148,11 +154,11 @@
       <div class="container-fluid">
         <div class="row">
 
-            <div class="col-md-6" style="height:0px; padding-bottom:100%">
+            <div class="col-md-6" style="height:0px; padding-bottom:80%">
               <h3 class="title">
                 Add a room
               </h3>
-               
+                <div >
                 <form role="form" id="add-form" method="post" class="textBg">
                   
                   <div class="form-group">
@@ -307,14 +313,17 @@
                   </div>
 
                 </form>
+                </div>
             </div>
                 
-            <div class="col-md-6" style="height:0px; padding-bottom:100%" id="map">
-              <div >
+            <div class="col-md-6" style="height:0px; padding-bottom:80%">
+              <div class="textBg" style="background:transparent" id="map">
+                
               </div>
             </div>
           </div>
         </div>
+      </div>
       </div>
       <script>
       var map;
