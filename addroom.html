@@ -8,8 +8,7 @@
       /* Always set the map height explicitly to define the size of the div
        * element that contains the map. */
       #map {
-        height: 100%; 
-        padding-top:181%;
+
       }
       /* Optional: Makes the sample page fill the window. */
       html,
@@ -149,7 +148,7 @@
       <div class="container-fluid">
         <div class="row">
 
-            <div class="col-md-6">
+            <div class="col-md-6" style="height:0px; padding-bottom:100%">
               <h3 class="title">
                 Add a room
               </h3>
@@ -310,8 +309,8 @@
                 </form>
             </div>
                 
-            <div class="col-md-6">
-              <div id="map">
+            <div class="col-md-6" style="height:0px; padding-bottom:100%" id="map">
+              <div >
               </div>
             </div>
           </div>
