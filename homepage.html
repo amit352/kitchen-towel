@@ -231,7 +231,7 @@
       var lng;
       function initMap() {
         map = new google.maps.Map(document.getElementById("map"), {
-          center: { lat: -34.397, lng: 150.644 },
+          center: { lat: 43.4715909, lng: -80.54578249999997 },
           zoom: 15
         });
       }
@@ -302,7 +302,7 @@
               td_2.innerHTML = search_result[index].address + "," + search_result[index].city + "," + search_result[index].province;
               var td_3 = document.createElement("td");
               td_3.setAttribute("align", "center");
-              td_3.innerHTML = search_result[index].price + "$";
+              td_3.innerHTML = "$" + search_result[index].price;
               var houseid = search_result[index].house_id;
               rowTr.appendChild(td_1);
               rowTr.appendChild(td_2);
