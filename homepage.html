@@ -63,7 +63,7 @@
         left:15%;
         right:15%;
         bottom:35%;
-        top:18%;
+        top:5%;
         text-align: center;
         height:auto;
         width:auto;
@@ -143,19 +143,19 @@
                 <label for="exampleInputEmail1">Address</label>
                 <input size="10%" type="text" id="address" class="form-control" placeholder="Waterloo"/>
             </div>
-            <div class="form-inline" style="position: absolute;top: 30%;left:16%">
+            <div class="form-inline" style="position: absolute;top: 30%;left:15%">
                 <label for="exampleInputPassword1">Number of bed</label>
                 <input size="10%" type="text" id="beds" class="form-control" onchange="remap()"/>
             </div>
-            <div class="form-inline" style="position: absolute; top: 30%;left:35%">
+            <div class="form-inline" style="position: absolute; top: 30%;left:32%">
                 <label for="exampleInputPassword1">Check in</label>
                 <input size="10%" type="date" class="form-control" id="date_start"/>
             </div>
-            <div class="form-inline" style="position:absolute; top: 30%;left:56%">
+            <div class="form-inline" style="position:absolute; top: 30%;left:52%">
                 <label for="exampleInputPassword1">Check out</label>
                 <input size="8%" type="date" class="form-control" id="date_end" />
             </div>
-            <div class="form-inline" style="position:absolute; top: 30%;left:79%">
+            <div class="form-inline" style="position:absolute; top: 30%;left:73%">
                 <form class="form-horizontal" role="form">
                     <div class="form-group">
                        <label for="exampleInputPassword1">Search Radius(KM)</label>
@@ -165,14 +165,20 @@
                     </div>
                 </form>          
             </div>
+            <div class="form-inline" style="position:absolute; top: 30%;left:92%">
+                <form class="form-horizontal" role="form">
+                    <button type="submit" class="btn btn-primary marginSearch">
+                        Search
+                      </button>
+                </form>
+            </div>
           </div>
-        </div>
      
       <div class="container-fluid">
           <div class="row">
-              <div class="col-md-6" style="height:0%; padding-bottom:80%">
+              <div class="col-md-6" style="height:0px; padding-bottom:65%; margin-top:5%">
                   <form role="form" id="add-form" method="post" class="textBg">        
-                      <div class="form-group" style="position:absolute; top:25%; left:5%; right:5%">
+                      <div class="form-group" style="position:absolute; top:2%; left:5%; right:5%;bottom:10%">
                           <div class="show" id="show" style="text-align: center">
                               <div id ="show_title">
                                   <span id="sentence">Explore new airbnb:</span>
@@ -182,7 +188,7 @@
                       </div>
                   </form>
               </div>
-              <div class="col-md-6" style="height:0px; padding-bottom:80%">
+              <div class="col-md-6" style="height:0px; padding-bottom:65%; margin-top:5%">
                   <div class="textBg" style="background:transparent" id="map">    
                   </div>
               </div>
