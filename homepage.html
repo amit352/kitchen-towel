@@ -159,15 +159,15 @@
                 <form class="form-horizontal" role="form">
                     <div class="form-group">
                        <label for="exampleInputPassword1">Search Radius(KM)</label>
-                               <em class="jian ">-</em>
+                               <em class="jian" style="cursor:pointer">-</em>
                                <input type="text" size="8%" value="1" class="form-control" id = "Distance"  data-decimals="1" min="0" max="9" step="0.1"/>
-                               <em class="add">+</em>
+                               <em class="add" style="cursor:pointer">+</em>
                     </div>
                 </form>          
             </div>
             <div class="form-inline" style="position:absolute; top: 30%;left:92%">
                 <form class="form-horizontal" role="form">
-                    <button type="submit" class="btn btn-primary marginSearch">
+                    <button type="submit" class="btn btn-primary marginSearch" id = "search" value="search">
                         Search
                       </button>
                 </form>
@@ -389,7 +389,7 @@
         $("input.small").InputSpinner({ groupClass: "input-group-sm" })
         $("input.large").InputSpinner({ groupClass: "input-group-lg" })
     </script>
-    <script>
+    <!-- <script>
     var num_jia = document.getElementById("num-jia");
         var num_jian = document.getElementById("num-jian");
         var input_num = document.getElementById("input-num");
@@ -409,7 +409,7 @@
             }
  
         }
-    </script>
+    </script> -->
     <script>
       $(document).ready(function(){
 //加的效果
@@ -429,7 +429,7 @@ $(this).next().val(num);
 })
     </script>
 
-    <script>
+    <!-- <script>
     var num_jia = document.getElementById("num-jia");
         var num_jian = document.getElementById("num-jian");
         var input_num = document.getElementById("input-num");
@@ -449,7 +449,7 @@ $(this).next().val(num);
             }
  
         }
-    </script>
+    </script> -->
 
 
     
