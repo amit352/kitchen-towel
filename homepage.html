@@ -262,6 +262,9 @@
 
       search_form.onsubmit = function(e) {
         e.preventDefault();
+        initMap();
+        remap();
+        console.log("hello");
         document.getElementById("show_table").innerHTML = "";
         document.getElementById("show_title").innerHTML = "";
         var title1 = document.createElement("span");
