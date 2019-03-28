@@ -98,6 +98,30 @@
             </dt>
             <div id="description"></div>
           </dl>
+          <span style="font-weight:bold;">Comments from others</span>
+          <div id="comments"></div>
+          <span style="font-weight:bold;">Comments:</span>
+          <div>
+            <textarea
+              rows="5"
+              cols="50"
+              style="width:100%"
+              id="com"
+              name="com"
+              autofocus
+            >
+            </textarea>
+          </div>
+          <div>
+            <button
+              type="button"
+              class="btn btn-success"
+              style="float: right;"
+              onclick="comment_submit()"
+            >
+              Comment
+            </button>
+          </div>
         </div>
       </div>
     </div>
@@ -109,6 +133,36 @@
         if (home_id.indexOf("?") != -1) {
           result = home_id.substr(home_id.indexOf("=") + 1);
         }
+        $.ajax({
+          type: "GET",
+          url: "/api/house/get_comments",
+          data: {
+            house_id: result
+          },
+          success: function(msg) {
+            var comment_div = document.getElementById("comments");
+            var comments = "";
+
+            for (var i = 0; i < msg.info.length; i++) {
+              username = "";
+              content = "";
+              for (var x in msg.info[i]) {
+                if (x == "email") {
+                  username = msg.info[i][x];
+                } else {
+                  content = msg.info[i][x];
+                }
+              }
+              var div_comment = document.getElementById("comments");
+              var span = document.createElement("span");
+              span.innerHTML = username + ":" + content + "</br>";
+              div_comment.append(span);
+            }
+          },
+          fail: function() {
+            console.log("load comments fail");
+          }
+        });
         $.ajax({
           type: "GET",
           url: "/api/house/download_photos",
@@ -366,6 +420,24 @@
             });
           }
         }
+      }
+      function comment_submit() {
+        var comment = document.getElementById("com").value;
+        $.ajax({
+          type: "POST",
+          url: "/api/house/create_comment",
+          data: {
+            house_id: result,
+            comment: comment
+          },
+          success: function(msg) {
+            alert("add comment successfully");
+            location.reload();
+          },
+          fail: function() {
+            console.log("comment fail");
+          }
+        });
       }
     </script>
     <script
