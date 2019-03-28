@@ -19,6 +19,10 @@
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css",rel="stylesheet" />
 
     <style>
+      .mybox{
+        height:485px;
+        overflow-x: auto;
+      }
       #sentence {
         font-size: 20px;
         font-weight: bold;
@@ -208,11 +212,11 @@
         </div>
         <div class="col-md-6">
           <div class="textBgLf">
-          <div class="show" id="show" style="text-align: center">
+          <div class="show" id="show" style="text-align: center; overflow:auto;">
             <div id ="show_title">
             <span id="sentence">Explore new airbnb:</span>
           </div>
-            <div id = "show_table" style="padding-top:20px" style = "height:400px"></div>
+            <div id = "show_table" style="padding-top:20px" class="mybox"></div>
           </div>
           </div>
         </div>
@@ -288,7 +292,7 @@
             table.setAttribute("style", " width:500px; table-layout: fixed;");
             $.each(search_result, function(index, n) {
               var rowTr = document.createElement("tr");
-              if(search_result[index].active == true)
+              if(search_result[index].active == false)
               {
                 rowTr.setAttribute("style", "background-color: #F78181;");
               }
