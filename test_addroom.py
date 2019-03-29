@@ -28,7 +28,7 @@ def testLogin(desc, housename, street, city, province, postalcode, beds, price, 
 def checkresult(x):
     resultMsg(browser.is_text_present(x))
 
-__testUrl = 'http://ubuntu1604-006.student.cs.uwaterloo.ca:19487/addroom.html'
+__testUrl = 'http://ubuntu1604-006.student.cs.uwaterloo.ca:19489/addroom.html'
 
 browser = Browser('chrome', headless=True)
 browser.visit(__testUrl)

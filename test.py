@@ -18,7 +18,7 @@ def testLogin(desc, username, password, result):
 def checkresult(x):
     resultMsg(browser.is_text_present(x))
 
-__testUrl = 'http://ubuntu1604-006.student.cs.uwaterloo.ca:19487/'
+__testUrl = 'http://ubuntu1604-006.student.cs.uwaterloo.ca:19489/'
 
 browser = Browser('chrome', headless=True)
 browser.visit(__testUrl)

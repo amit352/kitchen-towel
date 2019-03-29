@@ -25,7 +25,7 @@ def checkresult(x):
 
 __testUrl = 'http://ubuntu1604-006.student.cs.uwaterloo.ca:19489/signup.html'
 
-browser = Browser('chrome')
+browser = Browser('chrome',headless=True)
 browser.visit(__testUrl)
 
 print 'test page:'+ browser.title
