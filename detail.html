@@ -226,6 +226,21 @@
             var home_information = msg.info;
             placeid = home_information.place_id;
             var disabledDays = msg.already_booked;
+            var date_start = home_information.date_begin;
+            var date_s_time = getDate_start(date_start).getTime();
+            var today = new Date();
+            var today_time = today.getTime();
+            var today_formate = format(today);
+            if(date_s_time > today_time)
+            {
+              today_list=new Array();
+              var days_today_date = getDays(today_formate, date_start);
+              var days_today_list = days_today_date.split(",");
+              for(var k = 0; k < days_today_list.length; k++)
+              {
+                    today_list.push(days_today_list[k]);
+              }
+            }
             days_list = new Array();
             for (var j = 0; j < disabledDays.length; j++) {
               var days = new Array();
@@ -235,6 +250,7 @@
                 days_list.push(days[k]);
               }
             }
+            var total_list = days_list.concat(today_list);
             $("#datepicker_start").datepicker({
               minDate: new Date(),
               beforeShowDay: function(date) {
@@ -242,14 +258,14 @@
                   "yy-mm-dd",
                   date
                 );
-                return [days_list.indexOf(string_start) == -1];
+                return [total_list.indexOf(string_start) == -1];
               }
             });
             $("#datepicker_end").datepicker({
               minDate: new Date(),
               beforeShowDay: function(date) {
                 var string_end = jQuery.datepicker.formatDate("yy-mm-dd", date);
-                return [days_list.indexOf(string_end) == -1];
+                return [total_list.indexOf(string_end) == -1];
               }
             });
             AddMarker();
@@ -465,6 +481,21 @@
           }
         });
       }
+      function getDate_start(strDate){
+      var date = eval('new Date(' + strDate.replace(/\d+(?=-[^-]+$)/, 
+       function (a) { return parseInt(a, 10) - 1; }).match(/\d+/g) + ')');
+      return date;
+    }
+
+function format(Date){
+	var Y = Date.getFullYear();
+	var M = Date.getMonth() + 1;
+		M = M < 10 ? '0' + M : M;
+	var D = Date.getDate();
+		D = D < 10 ? '0' + D : D;
+	
+		return Y + '-' + M + '-' + D ;
+}
     </script>
     <script
       src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDEr7VaXJrWbi79GbHar7CPAS1LyYDAyew&callback=initMap"
