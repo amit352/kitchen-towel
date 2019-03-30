@@ -50,6 +50,13 @@
 
     <link href="css/bootstrap.min.css" rel="stylesheet" />
     <link href="css/style.css" rel="stylesheet" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.css"
+    />
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
   </head>
   <body>
     <div class="bg">
@@ -91,7 +98,20 @@
       <div class="row">
         <div class="col-md-4">
           <ul id="show_information"></ul>
-          <button type="button" class="btn btn-success" style="float: right;">
+          <div>
+            <p>From: <input type="text" id="datepicker_start" /></p>
+            <p>
+              To:&nbsp&nbsp&nbsp&nbsp&nbsp
+              <input type="text" id="datepicker_end" />
+            </p>
+          </div>
+          <div id="warning"></div>
+          <button
+            type="button"
+            class="btn btn-success"
+            style="float: right;"
+            onclick="reserve()"
+          >
             Reserve
           </button>
         </div>
@@ -102,6 +122,30 @@
             </dt>
             <div id="description"></div>
           </dl>
+          <span style="font-weight:bold;">Comments from others</span>
+          <div id="comments"></div>
+          <span style="font-weight:bold;">Comments:</span>
+          <div>
+            <textarea
+              rows="5"
+              cols="50"
+              style="width:100%"
+              id="com"
+              name="com"
+              autofocus
+            >
+            </textarea>
+          </div>
+          <div>
+            <button
+              type="button"
+              class="btn btn-success"
+              style="float: right;"
+              onclick="comment_submit()"
+            >
+              Comment
+            </button>
+          </div>
         </div>
       </div>
     </div>
@@ -111,11 +155,40 @@
       var placeid;
       window.onload = function() {
         initMap();
-        var result;
         var home_id = window.location.search;
         if (home_id.indexOf("?") != -1) {
           result = home_id.substr(home_id.indexOf("=") + 1);
         }
+        $.ajax({
+          type: "GET",
+          url: "/api/house/get_comments",
+          data: {
+            house_id: result
+          },
+          success: function(msg) {
+            var comment_div = document.getElementById("comments");
+            var comments = "";
+
+            for (var i = 0; i < msg.info.length; i++) {
+              username = "";
+              content = "";
+              for (var x in msg.info[i]) {
+                if (x == "email") {
+                  username = msg.info[i][x];
+                } else {
+                  content = msg.info[i][x];
+                }
+              }
+              var div_comment = document.getElementById("comments");
+              var span = document.createElement("span");
+              span.innerHTML = username + ":" + content + "</br>";
+              div_comment.append(span);
+            }
+          },
+          fail: function() {
+            console.log("load comments fail");
+          }
+        });
         $.ajax({
           type: "GET",
           url: "/api/house/download_photos",
@@ -152,6 +225,33 @@
           success: function(msg) {
             var home_information = msg.info;
             placeid = home_information.place_id;
+            var disabledDays = msg.already_booked;
+            days_list = new Array();
+            for (var j = 0; j < disabledDays.length; j++) {
+              var days = new Array();
+              var days_string = getDays(disabledDays[j][0], disabledDays[j][1]);
+              days = days_string.split(",");
+              for (var k = 0; k < days.length; k++) {
+                days_list.push(days[k]);
+              }
+            }
+            $("#datepicker_start").datepicker({
+              minDate: new Date(),
+              beforeShowDay: function(date) {
+                var string_start = jQuery.datepicker.formatDate(
+                  "yy-mm-dd",
+                  date
+                );
+                return [days_list.indexOf(string_start) == -1];
+              }
+            });
+            $("#datepicker_end").datepicker({
+              minDate: new Date(),
+              beforeShowDay: function(date) {
+                var string_end = jQuery.datepicker.formatDate("yy-mm-dd", date);
+                return [days_list.indexOf(string_end) == -1];
+              }
+            });
             AddMarker();
             var div = document.getElementById("show_information");
             var table = document.createElement("table");
@@ -242,13 +342,135 @@
           });
         }
       }
+
+      String.prototype.getDate = function() {
+        var strArr = this.split("-");
+        var date = new Date(strArr[0], strArr[1] - 1, strArr[2]);
+        return date;
+      };
+
+      function getDays(day1, day2) {
+        var d1 = day1.getDate();
+        var d2 = day2.getDate();
+
+        var dayMilliSeconds = 1000 * 60 * 60 * 24;
+
+        var d1Ms = d1.getTime();
+        var d2Ms = d2.getTime();
+
+        var ret;
+
+        for (d1Ms; d1Ms <= d2Ms; d1Ms += dayMilliSeconds) {
+          if (!ret) {
+            var day = new Date(d1Ms);
+
+            ret = day.getYMD();
+          } else {
+            var day = new Date(d1Ms);
+            ret = ret + "," + day.getYMD();
+          }
+        }
+
+        return ret;
+      }
+
+      Date.prototype.getYMD = function() {
+        var retDate = this.getFullYear() + "-";
+        if (this.getMonth() + 1 < 10) {
+          retDate += "0" + (this.getMonth() + 1) + "-";
+        } else {
+          retDate += this.getMonth() + 1 + "-";
+        }
+        if (this.getDate() < 10) {
+          retDate += "0" + this.getDate();
+        } else {
+          retDate += this.getDate();
+        }
+        return retDate;
+      };
+      function reserve() {
+        div = document.getElementById("warning");
+        if (div.innerHTML != " ") {
+          div.innerHTML = " ";
+        }
+        var start_end_flag = 0;
+        var choose_start = document.getElementById("datepicker_start");
+        var choose_start = $("#datepicker_start").datepicker("getDate");
+        var time_start = choose_start.getTime();
+        var day_start = new Date(time_start);
+        ret_start = day_start.getYMD();
+        var choose_end = $("#datepicker_end").datepicker("getDate");
+        var time_end = choose_end.getTime();
+        if (time_start >= time_end) {
+          start_end_flag = 1;
+          alert("end date should be later than start date");
+        }
+        if (start_end_flag == 0) {
+          var day_end = new Date(time_end);
+          ret_end = day_end.getYMD();
+          var choose_days_list = new Date();
+          choose_days_list = getDays(ret_start, ret_end).split(",");
+          var contain_flag = 0;
+          for (var n = 0; n < choose_days_list.length; n++) {
+            for (var m = 0; m < days_list.length; m++) {
+              if (choose_days_list[n] == days_list[m]) {
+                contain_flag = 1;
+                break;
+              }
+            }
+            if (contain_flag == 1) {
+              break;
+            }
+          }
+          if (contain_flag == 1) {
+            var span = document.createElement("span");
+            span.innerHTML = "some days have been reserved!";
+            $("#warning").append(span);
+            contain_flag = 0;
+          } else {
+            $.ajax({
+              type: "POST",
+              url: "/api/house/create_booking",
+              data: {
+                house_id: result,
+                date_begin: ret_start,
+                date_end: ret_end
+              },
+              success: function(msg) {
+                alert("booking successfully");
+                window.location.href = "homepage.html";
+              },
+              fail: function() {
+                console.log("reserve fail");
+              }
+            });
+          }
+        }
+      }
+      function comment_submit() {
+        var comment = document.getElementById("com").value;
+        $.ajax({
+          type: "POST",
+          url: "/api/house/create_comment",
+          data: {
+            house_id: result,
+            comment: comment
+          },
+          success: function(msg) {
+            alert("add comment successfully");
+            location.reload();
+          },
+          fail: function() {
+            console.log("comment fail");
+          }
+        });
+      }
     </script>
     <script
       src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDEr7VaXJrWbi79GbHar7CPAS1LyYDAyew&callback=initMap"
       async
       defer
     ></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.2.1/js/bootstrap.min.js"></script>
   </body>

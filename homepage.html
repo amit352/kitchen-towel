@@ -17,6 +17,10 @@
     <!-- <link href="css/style.css" rel="stylesheet" /> -->
 
     <style>
+      .mybox{
+        height:485px;
+        overflow-x: auto;
+      }
       #sentence {
         font-size: 20px;
         font-weight: bold;
@@ -183,6 +187,7 @@
         </form>
       <!-- </div> -->
 
+
      
      
         <div class="row">
@@ -197,6 +202,7 @@
                 </div>
               </div>
             </div>
+
           </div>
         </div>
         <div class="col-md-6" style="height:0px; padding-bottom:60%; margin-top:12%">
@@ -232,7 +238,7 @@
       $('#date_end').val(end_date);
       function initMap() {
         map = new google.maps.Map(document.getElementById("map"), {
-          center: { lat: -34.397, lng: 150.644 },
+          center: { lat: 43.4715909, lng: -80.54578249999997 },
           zoom: 15
         });
       }
@@ -260,7 +266,7 @@
       var search_form = document.getElementById("search-form");
       search_form.onsubmit = function(e) {
         e.preventDefault();
-        console.log("hello");
+
         var address = document.getElementById("address").value;
         console.log("ad1");
         if (address == "") {
@@ -289,15 +295,8 @@
         flag = 1;
     }
     
-
-
-
-
-
-
-
-
-
+        initMap();
+        remap();
         document.getElementById("show_table").innerHTML = "";
         document.getElementById("show_title").innerHTML = "";
         var title1 = document.createElement("span");
@@ -328,7 +327,7 @@
             table.setAttribute("style", " width:500px; table-layout: fixed;");
             $.each(search_result, function(index, n) {
               var rowTr = document.createElement("tr");
-              if(search_result[index].active == true)
+              if(search_result[index].active == false)
               {
                 rowTr.setAttribute("style", "background-color: #F78181;");
               }
@@ -342,7 +341,7 @@
               td_2.innerHTML = search_result[index].address + "," + search_result[index].city + "," + search_result[index].province;
               var td_3 = document.createElement("td");
               td_3.setAttribute("align", "center");
-              td_3.innerHTML = search_result[index].price + "$";
+              td_3.innerHTML = "$" + search_result[index].price;
               var houseid = search_result[index].house_id;
               rowTr.appendChild(td_1);
               rowTr.appendChild(td_2);
