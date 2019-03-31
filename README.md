@@ -18,4 +18,4 @@ To start with this project, firstly we build the frame of the every page with bo
 
 The css img and js files are the corresponding contents improve the funciton of each pages.
 
-Then we test the web applications using the Splinter.
+Then we test the web applications using the Splinter.
