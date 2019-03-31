@@ -1,6 +1,6 @@
 # kitchen-towel
 
-Hey there, welcome to our repository of frontend, find the wiki here: [wiki](https://github.com/new-airbnb/wiki)
+Hey there, welcome to our repository of frontend, find the wiki here: [wiki](https://github.com/new-airbnb/wiki/wiki)
 
 ### Deployment
 
