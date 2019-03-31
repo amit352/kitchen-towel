@@ -227,6 +227,9 @@
             placeid = home_information.place_id;
             var disabledDays = msg.already_booked;
             var date_start = home_information.date_begin;
+            var date_end = home_information.date_end;
+
+            console.log(date_end);
             var date_s_time = getDate_start(date_start).getTime();
             var today = new Date();
             var today_time = today.getTime();
@@ -253,6 +256,7 @@
             var total_list = days_list.concat(today_list);
             $("#datepicker_start").datepicker({
               minDate: new Date(),
+               maxDate: new Date(getDate_start(date_end).getTime()),
               beforeShowDay: function(date) {
                 var string_start = jQuery.datepicker.formatDate(
                   "yy-mm-dd",
@@ -263,6 +267,7 @@
             });
             $("#datepicker_end").datepicker({
               minDate: new Date(),
+              maxDate: new Date(getDate_start(date_end).getTime()),
               beforeShowDay: function(date) {
                 var string_end = jQuery.datepicker.formatDate("yy-mm-dd", date);
                 return [total_list.indexOf(string_end) == -1];
