@@ -1,4 +1,6 @@
 # kitchen-towel
+[![Build Status](https://travis-ci.org/new-airbnb/kitchen-towel.svg?branch=master)](https://travis-ci.org/new-airbnb/kitchen-towel)
+
 
 Hey there, welcome to our repository of frontend, find the wiki here: [wiki](https://github.com/new-airbnb/wiki/wiki)
 
@@ -19,4 +21,4 @@ In this project, we build the frame of every page with bootstrap. The main funct
 The css img and js files are the corresponding contents improve the function of each pages.
 
 ### Testing
-we use Pytest to do the unit test. To simulate the user behavior, we use Splinter and headless chrome browser.
+we use Pytest to do the unit tests. To simulate the user behavior, we use Splinter and headless chrome browser.
