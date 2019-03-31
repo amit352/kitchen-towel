@@ -4,15 +4,15 @@ Hey there, welcome to our repository of frontend, find the wiki here: [wiki](htt
 
 ### Deployment
 
-To start with this project, firstly we build the frame of the every page with bootstrap. The main funcition of each page are below:
+To start with this project, firstly we build the frame of every page with bootstrap. The main funcition of each page are below:
 
-* homepage.html: search a room under some criterics for tenants.
+* homepage.html: search a room under some criteria for tenants.
 
 * index.html: sign in for tenants.
 
 * signup.html: sign up for tenants.
 
-* addroom.html: add rooms for landlords.
+* addroom.html: add rooms with some criteria for landlords.
 
 * detail.html: show the detailed information of a room for tenants.
 
