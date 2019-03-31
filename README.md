@@ -4,7 +4,7 @@ Hey there, welcome to our repository of frontend, find the wiki here: [wiki](htt
 
 ### Deployment
 
-To start with this project, firstly we build the frame of every page with bootstrap. The main funcition of each page are below:
+To start with this project, firstly we build the frame of every page with bootstrap. The main function of each page are as below:
 
 * homepage.html: search a room under some criteria for tenants.
 
@@ -16,6 +16,6 @@ To start with this project, firstly we build the frame of every page with bootst
 
 * detail.html: show the detailed information of a room for tenants.
 
-The css img and js files are the corresponding contents improve the funciton of each pages.
+The css img and js files are the corresponding contents improve the function of each pages.
 
 Then we test the web applications using the Splinter.
