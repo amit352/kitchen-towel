@@ -414,7 +414,7 @@
               td_2.innerHTML = room_information[index].address + "," + room_information[index].city + "," + room_information[index].province;
               var td_3 = document.createElement("td");
               td_3.setAttribute("align", "center");
-              td_3.innerHTML = room_information[index].price + "$";
+              td_3.innerHTML = "$" + room_information[index].price;
               var houseid = room_information[index].house_id;
               rowTr.appendChild(td_1);
               rowTr.appendChild(td_2);
