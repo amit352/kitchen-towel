@@ -228,9 +228,9 @@
             var today = new Date();
             var today_time = today.getTime();
             var today_formate = format(today);
+            var today_list=new Array();
             if(date_s_time > today_time)
             {
-              today_list=new Array();
               var days_today_date = getDays(today_formate, date_start);
               var days_today_list = days_today_date.split(",");
               for(var k = 0; k < days_today_list.length; k++)
